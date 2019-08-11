@@ -10,7 +10,8 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "0.1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testBuildType "debug"
     }
     buildTypes {
         release {
@@ -24,6 +25,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 }
+
 
 apply from: '../dependencies.gradle'
 
@@ -46,7 +48,9 @@ dependencies {
 
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
 
-    testImplementation 'junit:junit:4.12'
+    // Espresso & Junit settings
+    androidTestImplementation 'com.android.support.test:rules:1.0.2'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    testImplementation 'junit:junit:4.12'
 }
