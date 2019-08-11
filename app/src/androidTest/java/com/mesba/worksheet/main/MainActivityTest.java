@@ -1,59 +1,58 @@
 package com.mesba.worksheet.main;
 
-
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
-
-import androidx.test.espresso.ViewInteraction;
-import androidx.test.filters.LargeTest;
+import androidx.test.filters.SmallTest;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
 
 import com.mesba.worksheet.R;
-
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import com.mesba.worksheet.SmokeTest;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 
-@LargeTest
+@SmallTest
 @RunWith(AndroidJUnit4.class)
 public class MainActivityTest {
 
     @Rule
-    public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
+    public ActivityTestRule<MainActivity> mActivityTestRule =
+            new ActivityTestRule<>(MainActivity.class);
+    private MainActivity mainActivity;
+
+    @Before
+    public void setActivity() {
+        mainActivity = mActivityTestRule.getActivity();
+    }
+
+    @After
+    public void tearDown() {
+    }
+
+    @SmokeTest
+    @Test
+    public void StartAndEndClock() {
+        onView(withId(R.id.btn_track_time)).perform(click());
+        onView(withId(R.id.btn_track_time)).perform(click());
+
+    }
 
     @Test
-    public void mainActivityTest() {
-        ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.btn_track_time), withText("Start"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                0),
-                        isDisplayed()));
-        appCompatButton.perform(click());
-
-        ViewInteraction appCompatButton2 = onView(
-                allOf(withId(R.id.btn_track_time), withText("End"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                0),
-                        isDisplayed()));
-        appCompatButton2.perform(click());
+    public void CheckTextShowTimesFrontPage(){
+        onView(allOf(withId(R.id.btn_show), withText("SHOW TIMES")));
     }
 
     private static Matcher<View> childAtPosition(
