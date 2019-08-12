@@ -2,5 +2,5 @@
     <string name="app_name">Work Sheet</string>
     <string name="start">Start</string>
     <string name="end">End</string>
-    <string name="show_times">Show Times</string>
+    <string name="show_times">Display My Work Logs</string>
 </resources>

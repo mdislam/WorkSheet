@@ -9,6 +9,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.mesba.worksheet.Helpers;
 import com.mesba.worksheet.R;
+import com.microsoft.appcenter.AppCenter;
+import com.microsoft.appcenter.analytics.Analytics;
+import com.microsoft.appcenter.crashes.Crashes;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -34,6 +37,9 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
         presenter = new MainPresenter(this, getApplicationContext());
         presenter.onCreate();
+
+        AppCenter.start(getApplication(), "ef53cd51-29d6-4a4f-ae0a-9113c057efad",
+                Analytics.class, Crashes.class);
     }
 
     @Override
